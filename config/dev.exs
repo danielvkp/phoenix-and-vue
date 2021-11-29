@@ -24,8 +24,13 @@ config :newapp, NewappWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "HsQ2Ckv3ZKI+kRwe7s6V6U0ZrOsU6hKL6uDr63iWcLBFh6964pHnwZiogTjc8+wV",
   watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    node: [
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support
@@ -56,6 +61,7 @@ config :newapp, NewappWeb.Endpoint,
 config :newapp, NewappWeb.Endpoint,
   live_reload: [
     patterns: [
+      ~r"priv/static/js/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/newapp_web/(live|views)/.*(ex)$",

@@ -14,6 +14,10 @@ defmodule NewappWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :jwt_authenticated do
+   plug Newapp.Guardian.AuthPipeline
+ end
+
   scope "/", NewappWeb do
     pipe_through :browser
 
@@ -23,6 +27,12 @@ defmodule NewappWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", NewappWeb do
     pipe_through :api
+  end
+
+  scope "/api/v1", NewappWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    get "/search-pdfs", PageController, :show
   end
 
   # Enables LiveDashboard only for development

@@ -5,4 +5,8 @@ defmodule NewappWeb.PageController do
     render(conn, "index.html")
   end
 
+  def show(conn, _params) do
+    send_resp conn, 200, Poison.encode!(%{mensaje: "success"})
+  end
+
 end

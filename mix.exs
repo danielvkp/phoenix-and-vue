@@ -51,6 +51,8 @@ defmodule Newapp.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:poison, "~> 5.0"},
       {:comeonin, "~> 3.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 

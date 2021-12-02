@@ -99,7 +99,7 @@
       }, 800),
 
       getPdfs(base_path, query) {
-        axios.get(`api/v1/search-pdfs`, query).then(res => {
+        axios.get(`api/v1/get-users`, query).then(res => {
           this.items = res.data.data
           this.pagination = _.omit(res.data, 'data')
         }, res => {

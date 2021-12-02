@@ -2,7 +2,7 @@ defmodule Newapp.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Poison.Encoder, only: [:email, :password]}
+  @derive {Poison.Encoder, only: [:id, :email, :password]}
   schema "users" do
     field :email, :string
     field :password, :string

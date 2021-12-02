@@ -62,16 +62,8 @@
             value: 'id',
           },
           {
-            text: 'Nombre',
-            value: 'nombre'
-          },
-          {
-            text: 'Archivo',
-            value: 'url'
-          },
-          {
-            text: 'Acciones',
-            value: 'action'
+            text: 'email',
+            value: 'email'
           },
         ]
       }
@@ -100,8 +92,8 @@
 
       getPdfs(base_path, query) {
         axios.get(`api/v1/get-users`, query).then(res => {
-          this.items = res.data.data
-          this.pagination = _.omit(res.data, 'data')
+          this.items = res.data.entries
+          //this.pagination = _.omit(res.data, 'data')
         }, res => {
           //this.$toast.error('Error consultando listado')
         })

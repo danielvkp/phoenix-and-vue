@@ -11,14 +11,10 @@ defmodule NewappWeb.PageController do
     send_resp conn, 200, Poison.encode!(%{mensaje: "success"})
   end
 
-  def get_users(conn, _params)do
-    paginate = from u in Newapp.User, select: u.email,
-      limit: ^10,
-      offset: ^((2-1) * 10)
-
-    users = Newapp.Repo.all(paginate)
-
-    send_resp conn, 200, Poison.encode!(users)
+  def get_users(conn, params)do
+    items = Newapp.User |> Newapp.Repo.paginate(params)
+    #%{entries: entries, metadata: metadata}
+    send_resp conn, 200, Poison.encode!(items)
   end
 
 end

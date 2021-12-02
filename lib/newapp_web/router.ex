@@ -27,6 +27,7 @@ defmodule NewappWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", NewappWeb do
     pipe_through :api
+    post "/signin", AuthController, :sign_in
   end
 
   scope "/api/v1", NewappWeb do

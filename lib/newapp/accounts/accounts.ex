@@ -2,6 +2,7 @@ defmodule Newapp.Accounts do
   alias Newapp.Guardian
   alias Newapp.User
   alias Newapp.Repo
+
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
   def token_sign_in(email, password) do
@@ -9,8 +10,8 @@ defmodule Newapp.Accounts do
      {:ok, user} ->
         Guardian.encode_and_sign(user)
      _ ->
-     {:error, :hey}
-    end
+        {:error, :hey}
+   end
   end
 
   defp email_password_auth(email, password) when is_binary(email) and is_binary(password) do

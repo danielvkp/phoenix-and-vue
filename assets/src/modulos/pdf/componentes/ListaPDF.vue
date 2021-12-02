@@ -41,6 +41,10 @@
   export default {
     data() {
       return {
+        user: {
+          email: 'danielvkp@live.com',
+          password: 'admin'
+        },
         pagination: {
           total: 0,
           count: 0,
@@ -99,16 +103,16 @@
           this.items = res.data.data
           this.pagination = _.omit(res.data, 'data')
         }, res => {
-          this.$toast.error('Error consultando listado')
+          //this.$toast.error('Error consultando listado')
         })
       },
 
-      eliminarPDF(item) {
-        axios.get(`api/eliminar-pdf/${item.id}`).then(res => {
-          this.items.splice(this.items.indexOf(item), 1)
-          this.$toast.sucs('Informe eliminado con exito')
+      signin() {
+        axios.post(`api/signin`, this.user).then(res => {
+          console.log(res.data);
         }, res => {
-          this.$toast.error('Error consultando listado')
+          console.log('errrrroooorrr');
+          //this.$toast.error('Error consultando listado')
         })
       }
     },

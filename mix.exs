@@ -53,7 +53,8 @@ defmodule Newapp.MixProject do
       {:comeonin, "~> 3.0"},
       {:bcrypt_elixir, "~> 1.0"},
       {:guardian, "~> 1.0"},
-      {:scrivener_ecto, "~> 2.0"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:faker, "~> 0.16", only: :dev}
     ]
   end
 

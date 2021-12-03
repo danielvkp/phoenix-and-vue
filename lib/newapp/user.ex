@@ -2,7 +2,7 @@ defmodule Newapp.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Poison.Encoder, only: [:id, :email, :password]}
+  @derive {Poison.Encoder, only: [:id, :email, :password, :role]}
   schema "users" do
     field :email, :string
     field :password, :string
@@ -13,8 +13,8 @@ defmodule Newapp.User do
 
   def changeset(struct, params \\ %{}) do
       struct
-      |> cast(params, [:email, :password])
-      |> validate_required([:email, :password])
+      |> cast(params, [:email, :password, :role])
+      |> validate_required([:email, :password, :role])
       |> put_password_hash
     end
 

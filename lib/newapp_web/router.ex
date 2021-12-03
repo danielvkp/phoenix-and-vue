@@ -33,7 +33,7 @@ defmodule NewappWeb.Router do
   scope "/api/v1", NewappWeb do
     pipe_through [:api, :jwt_authenticated]
 
-    get "/get-users", PageController, :get_users
+    post "/get-users", PageController, :get_users
   end
 
   # Enables LiveDashboard only for development

@@ -6,13 +6,13 @@
 
     <v-row dense>
       <v-col cols="12" md="3">
-        <v-text-field outlined v-model="query.search" label="Busqueda" hide-details></v-text-field>
+        <v-text-field outlined v-model="query.email" label="Busqueda" hide-details></v-text-field>
       </v-col>
     </v-row>
 
     <v-row dense class="mt-6 mb-3">
       <v-col cols="12">
-        <v-pagination :total-visible="7" :disabled="isloading" @input="next" v-model="pagination.current_page" :length="pagination.last_page"></v-pagination>
+        <v-pagination :total-visible="7" :disabled="isloading" @input="next" v-model="pagination.page_number" :length="pagination.total_pages"></v-pagination>
       </v-col>
     </v-row>
 
@@ -46,16 +46,14 @@
           password: 'admin'
         },
         pagination: {
-          total: 0,
-          count: 0,
-          per_page: 0,
-          current_page: 0,
-          total_pages: 0
+          page_number: 1,
+          page_size: 10,
+          total_entries: 151,
+          total_pages: 16,
         },
-        base_path: 'api/search-pdfs?page=1',
         items: [],
         query: {
-          search: null
+          email: null,
         },
         headers: [{
             text: 'ID',
@@ -74,7 +72,7 @@
         immediate: true,
         deep: true,
         handler(n) {
-          this.base_path = 'api/search-pdfs?page=1'
+          this.pagination.page_number = 1
           this.debounceQuery(n)
         }
       }
@@ -82,18 +80,17 @@
 
     methods: {
       next(page) {
-        this.base_path = `api/v1/search-pdfs?page=${page}`
-        this.getPdfs(this.base_path, this.query)
+        this.getPdfs(this.query)
       },
 
       debounceQuery: debounce(function(n) {
-        this.getPdfs(this.base_path, n)
+        this.getPdfs(n)
       }, 800),
 
-      getPdfs(base_path, query) {
-        axios.get(`api/v1/get-users`, query).then(res => {
+      getPdfs(query) {
+        axios.post(`api/v1/get-users?page=${this.pagination.page_number}`, query).then(res => {
           this.items = res.data.entries
-          //this.pagination = _.omit(res.data, 'data')
+          this.pagination = _.omit(res.data, 'entries')
         }, res => {
           //this.$toast.error('Error consultando listado')
         })

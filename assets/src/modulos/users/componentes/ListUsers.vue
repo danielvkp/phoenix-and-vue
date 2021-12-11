@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h2 class="mb-4 blue-grey--text font-weight-light">LISTADO INFORMES</h2>
+    <h2 class="mb-4 blue-grey--text font-weight-light">LISTADO USUARIOS</h2>
 
     <loader v-if="isloading"></loader>
 
@@ -17,17 +17,9 @@
     </v-row>
 
     <v-data-table :headers="headers" :items="items" disable-pagination hide-default-footer item-key="id" class="elevation-1 mt-6">
-      <template v-slot:item.url="{ item }">
-        <a target="_blank" :href="`documentos/${item.url}`">
-          <v-icon class="mr-2" color="orange">
-            mdi-cloud-download
-          </v-icon>
-        </a>
-
-      </template>
       <template v-slot:item.action="{ item }">
-        <v-icon @click="eliminarPDF(item)" class="mr-2" color="red">
-          mdi-trash-can
+        <v-icon @click="" class="mr-2" color="purple">
+          mdi-anchor
         </v-icon>
       </template>
     </v-data-table>
@@ -62,6 +54,10 @@
           {
             text: 'email',
             value: 'email'
+          },
+          {
+            text: '',
+            value: 'action'
           },
         ]
       }

@@ -15,7 +15,7 @@ defmodule Newapp.UserSeacher do
   end
 
   defp maybe_filter_email(query, %{"email" => email}) do
-     where(query, [u], like(u.email, ^"#{email}%"))
+     where(query, [u], like(u.email, ^"%#{email}%"))
   end
 
   defp maybe_filter_email(query, %{"page" => page}),

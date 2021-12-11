@@ -34,6 +34,7 @@ defmodule NewappWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     post "/get-users", PageController, :get_users
+    get "/get-auth-user", PageController, :get_auth_user
   end
 
   # Enables LiveDashboard only for development

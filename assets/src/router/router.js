@@ -3,15 +3,14 @@ import auth from '../auth/auth.js'
 
 import Login from '../base_components/auth/Login.vue'
 import Inicio from '../base_components/inicio/Inicio.vue'
-import rutas_pdf from '../modulos/pdf/rutas/rutas_pdf'
-
+import rutas_users from '../modulos/users/rutas/rutas_users'
 
 const base_routes = [
   ...route('/login', Login),
   ...route('/', Inicio, {
     Auth: true,
   }),
-  ...rutas_pdf,
+  ...rutas_users,
 ]
 
 const routes = [

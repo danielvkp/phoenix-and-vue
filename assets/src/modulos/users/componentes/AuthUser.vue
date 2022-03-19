@@ -6,9 +6,18 @@
 
     <v-row dense>
       <v-col cols="12" md="3">
-        <v-btn @click="get_auth_user" class="white--text elevation-0" color="purple">get auth user</v-btn>
+        <v-btn @click="get_auth_user" class="white--text elevation-0" color="purple">connect to private socket</v-btn>
       </v-col>
     </v-row>
+
+    <v-row dense>
+      <v-col cols="12" md="3">
+        <v-text-field v-model="chat.room" outlined label=""></v-text-field>
+        <v-btn @click="send_request" class="white--text elevation-0" color="orange">send request</v-btn>
+      </v-col>
+    </v-row>
+
+
 
   </div>
 </template>
@@ -20,7 +29,10 @@
     data() {
       return {
         user: {},
-        chat: null,
+        chat: {
+          room: 1
+        },
+        my_chat: null
       }
     },
 
@@ -29,12 +41,26 @@
     },
 
     methods: {
+      listen_to_socket(channel, channel_name) {
+        channel.on(`chat:${channel_name}:new_request`, payload => {
+          console.log(payload)
+          console.log('llego algo babyyy')
+        })
+      },
+
       get_auth_user() {
         axios.get(`api/v1/get-auth-user`).then(res => {
-          console.log(res.data)
           this.user = res.data
-          Chat.init(MySocket, 'lobby')
+          this.my_chat = Chat.init(MySocket, res.data.id)
+          this.listen_to_socket(this.my_chat, res.data.id)
         }, res => {})
+      },
+
+      send_request() {
+        console.log(this.chat.room);
+        this.my_chat.push("new_request", {
+          room_id: this.chat.room,
+        })
       }
     },
 

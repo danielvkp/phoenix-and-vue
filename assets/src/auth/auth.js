@@ -8,7 +8,7 @@ export default {
 
   signin: function(user) {
     axios.post('api/signin', user).then(res => {
-      console.log(res.data.token);
+      console.log(res.data.token)
       localStorage.setItem('auth_token', res.data.token)
       this.user.authenticated = true
       axios.defaults.headers.common['Authorization'] = ' Bearer ' + res.data.token

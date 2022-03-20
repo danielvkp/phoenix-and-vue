@@ -4,9 +4,12 @@
 
     <loader v-if="isloading"></loader>
 
-    <v-row dense>
+    <v-row dense align="center">
       <v-col cols="12" md="3">
-        <v-text-field outlined v-model="query.email" label="Busqueda" hide-details></v-text-field>
+        <v-text-field small dense outlined v-model="query.email" label="Busqueda" hide-details></v-text-field>
+      </v-col>
+      <v-col cols="12" md="3">
+        <v-btn @click="sendEmail" class="white--text" color="blue">nuevo</v-btn>
       </v-col>
     </v-row>
 
@@ -99,7 +102,16 @@
           console.log('errrrroooorrr');
           //this.$toast.error('Error consultando listado')
         })
+      },
+
+      sendEmail() {
+        axios.post(`api/v1/send-email`).then(res => {
+          console.log(res.data);
+        }, res => {
+          //this.$toast.error('Error consultando listado')
+        })
       }
+
     },
 
     computed: {

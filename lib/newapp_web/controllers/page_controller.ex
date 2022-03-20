@@ -4,9 +4,24 @@ defmodule NewappWeb.PageController do
   alias Newapp.User .{Repo, User}
   alias Newapp.UserSeacher
   alias Newapp.Guardian
+  import Bamboo.Email
+  alias Newapp.Mailer
 
   def index(conn, _params) do
     render(conn, "index.html")
+  end
+
+  def send_email(conn, _params)do
+    new_email(
+     to: "danielvkp@live.com",
+     from: "madagascartv@triangulocreativove.com",
+     subject: "Welcome to the app.",
+     html_body: "<strong>Thanks for joining!</strong>",
+     text_body: "Thanks for joining!"
+   )
+   |> Mailer.deliver_now!()
+
+   send_resp conn, 200, Poison.encode!(%{mensaje: "success"})
   end
 
   def get_auth_user(conn, _params) do

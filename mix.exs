@@ -20,7 +20,7 @@ defmodule Newapp.MixProject do
   def application do
     [
       mod: {Newapp.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo]
     ]
   end
 
@@ -54,7 +54,9 @@ defmodule Newapp.MixProject do
       {:bcrypt_elixir, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:scrivener_ecto, "~> 2.0"},
-      {:faker, "~> 0.16", only: :dev}
+      {:faker, "~> 0.16", only: :dev},
+      {:bamboo, "~> 2.2.0"},
+      {:bamboo_smtp, "~> 4.1.0"}
     ]
   end
 

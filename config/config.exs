@@ -1,10 +1,3 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 import Config
 
 config :newapp,
@@ -24,12 +17,20 @@ config :newapp, NewappWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :newapp, Newapp.Mailer, adapter: Swoosh.Adapters.Local
+#config :newapp, Newapp.Mailer, adapter: Swoosh.Adapters.Local
 
-# Swoosh API client is needed for adapters other than SMTP.
+config :newapp, Newapp.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "mail.triangulocreativove.com",
+  port: 465,
+  username: "madagascartv@triangulocreativove.com",
+  password: "Santiago*25",
+  tls: :if_available,
+  ssl: true,
+  retries: 1
+
 config :swoosh, :api_client, false
 
-# Configure esbuild (the version is required)
 config :esbuild,
   version: "0.12.18",
   default: [

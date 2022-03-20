@@ -35,6 +35,8 @@ defmodule NewappWeb.Router do
 
     post "/get-users", PageController, :get_users
     get "/get-auth-user", PageController, :get_auth_user
+    post "/send-email", PageController, :send_email
+
   end
 
   # Enables LiveDashboard only for development

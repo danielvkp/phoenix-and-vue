@@ -3,7 +3,7 @@
 
  window.Vue = require('vue')
 
- //import VuetifyToast from 'vuetify-toast-snackbar-ng'
+ import VuetifyToast from 'vuetify-toast-snackbar-ng'
 
  import setup from './interceptors/interceptors.js'
  setup()
@@ -21,27 +21,26 @@
  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('auth_token')}`
  axios.defaults.withCredentials = true;
 
- /*Vue.use(VuetifyToast, {
-     x: 'right',
-     y: 'top',
-     color: 'info',
-     icon: 'mdi-info',
-     timeout: 3000,
-     dismissable: true,
-     autoHeight: false,
-     multiLine: false,
-     vertical: false,
-     shorts: {
-       error: {
-         color: 'red'
-       },
-       sucs: {
-         color: 'green'
-       },
-       warn: {
-         color: 'orange'
-       }
+ Vue.use(VuetifyToast, {
+   x: 'right',
+   y: 'top',
+   color: 'info',
+   icon: 'mdi-info',
+   timeout: 3000,
+   dismissable: true,
+   autoHeight: false,
+   multiLine: false,
+   vertical: false,
+   shorts: {
+     error: {
+       color: 'red'
      },
-     property: '$toast'
-   })
-   */
+     sucs: {
+       color: 'green'
+     },
+     warn: {
+       color: 'orange'
+     }
+   },
+   property: '$toast'
+ })

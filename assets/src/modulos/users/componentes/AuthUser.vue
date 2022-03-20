@@ -42,9 +42,9 @@
 
     methods: {
       listen_to_socket(channel, channel_name) {
-        channel.on(`chat:${channel_name}:new_request`, payload => {
+        channel.on(`request_message`, payload => {
           console.log(payload)
-          console.log('llego algo babyyy')
+          this.$toast.sucs('llego algo')
         })
       },
 
@@ -57,8 +57,7 @@
       },
 
       send_request() {
-        console.log(this.chat.room);
-        this.my_chat.push("new_request", {
+        this.my_chat.push("request_message", {
           room_id: this.chat.room,
         })
       }

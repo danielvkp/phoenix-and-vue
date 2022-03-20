@@ -5,16 +5,13 @@ defmodule NewappWeb.ChatChannel do
     {:ok, %{channel: "chat:#{room_id}"}, assign(socket, :room_id, room_id)}
   end
 
-  def handle_in("new_request", %{"room_id" => room_id}, socket) do
-    #IO.puts(room_id)
-    socket.assigns["553"]
-    push socket, "chat:553:new_request", %{token: nil}
+  def handle_in("request_message", %{"room_id" => room_id}, socket) do
+    broadcast_from!(socket, "request_message", %{room_id: room_id})
 
-    broadcast_from!(socket, "new_request", %{room_id: "hola"})
-    NewappWeb.Endpoint.broadcast_from!(self(), "chat:553", "new_request",  %{room_id: "hola"})
-
+    NewappWeb.Endpoint.broadcast_from!(self(), "chat:553", "request_message",  %{room_id: room_id})
 
     {:noreply, socket}
+
   end
 
   #defp insert_message(msg) do
